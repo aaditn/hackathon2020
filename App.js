@@ -22,6 +22,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const App: () => React$Node = () => {
   const [buttonPress, setButtonPress] = useState('');
+  const [selectTileIndex, setSelectTileIndex] = useState();
   const headGear = [
     {
       name: 'SV1676',
@@ -85,9 +86,24 @@ const App: () => React$Node = () => {
       </TouchableOpacity>
     );
   };
-
+  const Avatar = () => {
+    return (
+      <View
+        style={{marginTop: 40, width: 200, height: 300, alignSelf: 'center'}}>
+        <Image
+          style={{flex: 1}}
+          source={{
+            uri:
+              'https://upload.wikimedia.org/wikipedia/en/b/bb/Male_Bathroom_Symbol.png',
+          }}
+        />
+      </View>
+    );
+  };
   const Carousel = (props) => {
     const data = props.data;
+    const value = props.value;
+    console.log(buttonPress, value, selectTileIndex);
     return (
       <ScrollView
         horizontal={true}
@@ -99,7 +115,16 @@ const App: () => React$Node = () => {
             onPress={() => {
               onTilePress(idx);
             }}>
-            <View style={styles.tile}>
+            <View
+              style={[
+                styles.tile,
+                {
+                  backgroundColor:
+                    buttonPress === value && idx == selectTileIndex
+                      ? '#cff'
+                      : '#fff',
+                },
+              ]}>
               <Image
                 style={{
                   borderRadius: 15,
@@ -122,6 +147,7 @@ const App: () => React$Node = () => {
 
   const onTilePress = (idx) => {
     console.log('pressed ', idx);
+    setSelectTileIndex(idx);
   };
   const onHeadGearPress = () => {
     console.log('PressedHeadGear');
@@ -150,9 +176,14 @@ const App: () => React$Node = () => {
           <Chooser onPress={onWeaponPress} header={'Weapon'} value={'weapon'} />
           <Chooser onPress={onVestPress} header={'Vest'} value={'vest'} />
         </ScrollView>
-        {buttonPress == 'headGear' && <Carousel data={headGear} />}
-        {buttonPress == 'weapon' && <Carousel data={weapons} />}
-        {buttonPress == 'vest' && <Carousel data={vests} />}
+        {buttonPress == 'headGear' && (
+          <Carousel data={headGear} value={'headGear'} />
+        )}
+        {buttonPress == 'weapon' && (
+          <Carousel data={weapons} value={'weapon'} />
+        )}
+        {buttonPress == 'vest' && <Carousel data={vests} value={'vest'} />}
+        <Avatar />
       </SafeAreaView>
     </>
   );
@@ -170,7 +201,6 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     width: 150,
     height: 150,
-    backgroundColor: '#eee',
     borderWidth: 1,
     borderRadius: 15,
   },
