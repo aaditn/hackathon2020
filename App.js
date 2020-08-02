@@ -24,19 +24,17 @@ const App: () => React$Node = () => {
   const [buttonPress, setButtonPress] = useState('');
   const headGear = [
     {
-      name: 'SSh-39',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/4/42/Casque_sovietique_mg_1699.jpg',
+      name: 'SV1676',
+      image: 'https://decrep.it/images/hackathon/ONSV1676__01.png',
     },
     {
-      name: 'M53',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/2/21/Vz._53_Helmet.jpg',
+      name: 'SX425',
+      image: 'https://decrep.it/images/hackathon/81pxjGhV-RL._AC_SX425_.png',
     },
     {
-      name: 'M1',
+      name: 'Army Helmet',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/a/a4/Helmet-P4140438-black.jpg',
+        'https://decrep.it/images/hackathon/138142971-us-army-helmet-vietnam.png',
     },
   ];
   const weapons = [
