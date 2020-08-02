@@ -42,17 +42,15 @@ const App: () => React$Node = () => {
     {
       name: 'Walther 38',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/2/2b/Walther_P38_1943_Whermacht.jpg',
+        'https://decrep.it/images/hackathon/Walther_P38_1943_Whermacht.png',
     },
     {
       name: 'M14',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSVW_JJ3GFjEJGRNfjV3fhzr4BxV2Q0IJMj-w&usqp=CAU',
+      image: 'https://decrep.it/images/hackathon/m14.png',
     },
     {
       name: 'L1A1',
-      image:
-        'https://3dwarehouse.sketchup.com/warehouse/v1.0/publiccontent/7dbf2041-ac5a-4c4a-b404-324509421f59',
+      image: 'https://decrep.it/images/hackathon/L1a1.png',
     },
   ];
   const vests = [
