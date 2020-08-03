@@ -138,14 +138,14 @@ const App: () => React$Node = () => {
           style={{flex: 1, width: 200, height: 200}}
           source={{
             uri:
-              'https://upload.wikimedia.org/wikipedia/en/b/bb/Male_Bathroom_Symbol.png',
+              'https://cdn4.iconfinder.com/data/icons/hotel-and-services-3-2/512/113-512.png',
           }}
         />
         {selectedHeadGear !== '' && (
           <Image
             style={{
               position: 'absolute',
-              top: -20,
+              top: -25,
               left: 75,
               width: 50,
               height: 50,
@@ -158,11 +158,12 @@ const App: () => React$Node = () => {
         {selectedWeapon !== '' && (
           <Image
             style={{
+              resizeMode: 'contain',
               position: 'absolute',
-              top: 70,
-              left: 60,
-              width: 80,
-              height: 80,
+              top: 40,
+              left: 0,
+              width: 200,
+              height: 200,
             }}
             source={{
               uri: selectedWeapon,
@@ -173,7 +174,7 @@ const App: () => React$Node = () => {
           <Image
             style={{
               position: 'absolute',
-              top: 60,
+              top: 70,
               left: 40,
               width: 120,
               height: 120,
@@ -214,11 +215,12 @@ const App: () => React$Node = () => {
               <Image
                 style={{
                   borderRadius: 15,
-                  marginTop: 10,
+                  marginTop: 4,
                   alignSelf: 'center',
-                  width: 140,
-                  height: 120,
+                  width: 150,
+                  height: 100,
                 }}
+                resizeMode="contain"
                 source={{
                   uri: item.image,
                 }}
@@ -350,6 +352,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   avatarContainer: {
+    marginTop: 40,
     width: 200,
     height: 300,
     alignSelf: 'center',
