@@ -29,6 +29,9 @@ const App: () => React$Node = () => {
   const [totalAgility, setTotalAgility] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [totalEffectiveness, setTotalEffectiveness] = useState(0);
+  const [selectedHeadGearIdx, setSelectedHeadGearIdx] = useState();
+  const [selectedWeaponIdx, setSelectedWeaponIdx] = useState();
+  const [selectedVestIdx, setSelectedVestIdx] = useState();
   const headGear = [
     {
       name: 'SV1676',
@@ -243,11 +246,32 @@ const App: () => React$Node = () => {
     );
   };
   const TotalAttributes = () => {
+    console.log(selectedHeadGearIdx, selectedWeaponIdx, selectedVestIdx);
+    let agility = 0;
+    let cost = 0;
+    let effectiveness = 0;
+    if (selectedHeadGearIdx !== undefined) {
+      agility += headGear[selectedHeadGearIdx].attributes[0].value;
+      cost += headGear[selectedHeadGearIdx].attributes[1].value;
+      effectiveness += headGear[selectedHeadGearIdx].attributes[2].value;
+      console.log('1: ', agility, cost, effectiveness);
+    }
+    if (selectedWeaponIdx !== undefined) {
+      agility += weapons[selectedWeaponIdx].attributes[0].value;
+      cost += weapons[selectedWeaponIdx].attributes[1].value;
+      effectiveness += weapons[selectedWeaponIdx].attributes[2].value;
+      console.log('2: ', agility, cost, effectiveness);
+    }
+    if (selectedVestIdx !== undefined) {
+      agility += vests[selectedVestIdx].attributes[0].value;
+      cost += vests[selectedVestIdx].attributes[1].value;
+      effectiveness += vests[selectedVestIdx].attributes[2].value;
+      console.log('3: ', agility, cost, effectiveness);
+    }
     return (
       <View style={[styles.totalAttr, {borderWidth: 1}]}>
         <Text style={styles.AttrText}>
-          Total Agility: {totalAgility}%, Total Cost: {totalCost}%, Total
-          Effectiveness: {totalEffectiveness}%
+          Agility: {agility}, Cost: {cost}, Effectiveness: {effectiveness}
         </Text>
       </View>
     );
@@ -256,16 +280,20 @@ const App: () => React$Node = () => {
   const onTilePress = (idx) => {
     console.log('pressed ', idx);
     if (buttonPress === 'headGear') {
+      setSelectedHeadGearIdx(idx);
+
       setSelectedHeadGear(headGear[idx].image);
       setTotalAgility(headGear[idx].attributes[0].value);
       setTotalCost(headGear[idx].attributes[1].value);
       setTotalEffectiveness(headGear[idx].attributes[2].value);
     } else if (buttonPress === 'weapon') {
+      setSelectedWeaponIdx(idx);
       setSelectedWeapon(weapons[idx].image);
       setTotalAgility(weapons[idx].attributes[0].value);
       setTotalCost(weapons[idx].attributes[1].value);
       setTotalEffectiveness(weapons[idx].attributes[2].value);
     } else if (buttonPress === 'vest') {
+      setSelectedVestIdx(idx);
       setSelectedVest(vests[idx].image);
       setTotalAgility(vests[idx].attributes[0].value);
       setTotalCost(vests[idx].attributes[1].value);
@@ -384,11 +412,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   totalAttr: {
-    width: 350,
+    width: 150,
     height: 50,
     alignSelf: 'center',
   },
   AttrText: {
+    color: '#fc0303',
     alignSelf: 'center',
   },
 });
