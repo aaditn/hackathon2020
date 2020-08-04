@@ -32,6 +32,9 @@ const App: () => React$Node = () => {
   const [selectedHeadGearIdx, setSelectedHeadGearIdx] = useState();
   const [selectedWeaponIdx, setSelectedWeaponIdx] = useState();
   const [selectedVestIdx, setSelectedVestIdx] = useState();
+  const AGILITYOPPOSE = 165;
+  const COSTOPPOSE = 165;
+  const EFFECTIVENESSOPPOSE = 180;
   const headGear = [
     {
       name: 'SV1676',
@@ -43,16 +46,16 @@ const App: () => React$Node = () => {
       image: 'https://decrep.it/images/hackathon/ONSV1676__01.png',
     },
     {
-      name: 'SX425',
+      name: 'APH6A',
       attributes: [
         {key: 'agility', value: 60},
         {key: 'cost', value: 60},
         {key: 'effectiveness', value: 60},
       ],
-      image: 'https://decrep.it/images/hackathon/81pxjGhV-RL._AC_SX425_.png',
+      image: 'https://decrep.it/images/hackathon/APH6A.png',
     },
     {
-      name: 'Army Helmet',
+      name: 'M1',
       attributes: [
         {key: 'agility', value: 30},
         {key: 'cost', value: 60},
@@ -64,14 +67,13 @@ const App: () => React$Node = () => {
   ];
   const weapons = [
     {
-      name: 'Walther 38',
+      name: 'M1 Garand',
       attributes: [
         {key: 'agility', value: 20},
         {key: 'cost', value: 60},
         {key: 'effectiveness', value: 90},
       ],
-      image:
-        'https://decrep.it/images/hackathon/Walther_P38_1943_Whermacht.png',
+      image: 'https://decrep.it/images/hackathon/M1Garand.png',
     },
     {
       name: 'M14',
@@ -194,6 +196,7 @@ const App: () => React$Node = () => {
       </View>
     );
   };
+
   const Carousel = (props) => {
     const data = props.data;
     const value = props.value;
@@ -268,9 +271,12 @@ const App: () => React$Node = () => {
       effectiveness += vests[selectedVestIdx].attributes[2].value;
       console.log('3: ', agility, cost, effectiveness);
     }
+    const isRedText =
+      AGILITYOPPOSE + COSTOPPOSE + EFFECTIVENESSOPPOSE >=
+      agility + cost + effectiveness;
     return (
       <View style={[styles.totalAttr, {borderWidth: 1}]}>
-        <Text style={styles.AttrText}>
+        <Text style={isRedText ? styles.AttrTextRed : styles.AttrTextGreen}>
           Agility: {agility}, Cost: {cost}, Effectiveness: {effectiveness}
         </Text>
       </View>
@@ -416,8 +422,12 @@ const styles = StyleSheet.create({
     height: 50,
     alignSelf: 'center',
   },
-  AttrText: {
+  AttrTextRed: {
     color: '#fc0303',
+    alignSelf: 'center',
+  },
+  AttrTextGreen: {
+    color: '#0a0',
     alignSelf: 'center',
   },
 });
